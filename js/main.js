@@ -25,7 +25,7 @@ const gameStatus =(array)=>{
         'src':'sounds/clap.mp3',
         'volume':0.4,
         'autoplay':'autoplay'
-    }).appendTo(res);
+    }).appendTo();
     
     
            resetgame();
