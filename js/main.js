@@ -18,8 +18,16 @@ const gameStatus =(array)=>{
         else{
             res='o';
         }
-    
+        
+        
     alert(res+" is the winner");
+    $("<audio></audio>").attr({
+        'src':'sounds/clap.mp3',
+        'volume':0.4,
+        'autoplay':'autoplay'
+    }).appendTo(res);
+    
+    
            resetgame();
        }
             checkgame();
@@ -70,6 +78,11 @@ $('.cell').click(function(){
     
     if(xNext===true){
         $(this).addClass('x')
+        $("<audio></audio>").attr({
+            'src':'sounds/click.mp3',
+            'volume':0.4,
+            'autoplay':'autoplay'
+        }).appendTo(this);
         // toggle the statement
         $('.status').html('<div>o is next</div>').toggleClass('test')
         //calling the function to check if there is a winner
@@ -84,6 +97,11 @@ $('.cell').click(function(){
     else
     {
         $(this).addClass('o')
+        $("<audio></audio>").attr({
+            'src':'sounds/click.mp3',
+            'volume':0.4,
+            'autoplay':'autoplay'
+        }).appendTo(this);
         $('.status').html('<div>x is next</div>').toggleClass('test')
         gameStatus(arr);
         gameStatus(arr2);
