@@ -1,135 +1,99 @@
-const statusDiv= $('.status')
-const resetDiv= $('.reset')
-const cells= $('.cell')
-//console.log(cells);
-//var arr=[1,2,3,4,5,6,7,8,9];
-//var arr=[[1,2,3],[4,5,6],[7,8,9]];
-//
-// score = {"x": 0, "o": 0};
-// win = [6, 15, 24, 12, 15, 18, 15, 15]
-
-
-const gameStatus =(type)=>{
+//function to check the winner status
+const gameStatus =(array)=>{
    
+    //looping over all cells
+    for(let i=0;i<array.length;i=i+3){ 
     
-    // if ($("#1").hasClass('x') &&  
-    //     ($("#2").hasClass('x')) && 
-    //    ($("#3").hasClass('x'))) {
-    //         console.log("we have a winner")
-    //    }
-
-// var arr=[ [ 1, 2, 3 ], [ 1, 4, 7 ], [ 1, 5, 9 ],
-//  [ 2, 5, 8 ], [ 3, 5, 7 ], [ 3, 6, 9 ], [ 4, 5, 6 ], [ 7, 8, 9 ] ];
-
-//  for(let i=0;i<arr.length;i++){
-//      for(let j=0;j<arr[i].length;j++){
-//         if(($('#'+arr[i][j])).hasClass('x')&&($('#'+arr[i][j+1])).hasClass('x')&&($('#'+arr[i][j+2])).hasClass('x')||
-//             ($('#'+arr[i][j])).hasClass('o')&&($('#'+arr[i][j+1])).hasClass('o')&&($('#'+arr[i][j+2])).hasClass('o'));
-//             {
-//                    alert("is the winner");
-
-//             }
-        
-//      }
-//  }
-   var arr=[1,2,3,4,5,6,7,8,9];
-   var arr2=[1,4,7,2,5,8,3,6,9];
-   var arr3=[1,5,9,3,5,7];
-   //var winner=false;
-//    console.log(($('#'+arr[1])).hasClass('x'));
-
-for(let i=0;i<arr.length;i=i+3){ 
-    
-    if(($('#'+arr[i])).hasClass('x')&&($('#'+arr[i+1])).hasClass('x')&&($('#'+arr[i+2])).hasClass('x')||
-    ($('#'+arr[i])).hasClass('o')&&($('#'+arr[i+1])).hasClass('o')&&($('#'+arr[i+2])).hasClass('o'))
-
-   {
-    const winner=($('#'+arr[i]));
-
-       alert(winner+"is the winner");
-   }}
-//    else if(($('#'+arr[i])).hasClass('x')&&($('#'+arr[i+3])).hasClass('x')&&($('#'+arr[i+6])).hasClass('x')||
-//    ($('#'+arr[i])).hasClass('o')&&($('#'+arr[i+3])).hasClass('o')&&($('#'+arr[i+6])).hasClass('o'))
-//  {const winner=($('#'+arr[i]));
-//       alert(winner+"is the winner");}
-
-  for(let i=0;i<arr2.length;i=i+3)
-       {
-        if(($('#'+arr2[i])).hasClass('x')&&($('#'+arr2[i+1])).hasClass('x')&&($('#'+arr2[i+2])).hasClass('x')||
-        ($('#'+arr2[i])).hasClass('o')&&($('#'+arr2[i+1])).hasClass('o')&&($('#'+arr2[i+2])).hasClass('o')){
-
-            const winner=($('#'+arr[i]));
-
-      alert(winner+"is the winner");
+        //check if there is a winner
+        if(($('#'+array[i])).hasClass('x')&&($('#'+array[i+1])).hasClass('x')&&($('#'+array[i+2])).hasClass('x')||
+        ($('#'+array[i])).hasClass('o')&&($('#'+array[i+1])).hasClass('o')&&($('#'+array[i+2])).hasClass('o'))
+   
+        //to display the winner in an alert
+        {const winner=($('#'+array[i]));
+        var res = winner.hasClass('x');
+       
+        if(winner.hasClass('x')){
+            res='x';
+        }
+        else{
+            res='o';
         }
     
+    alert(res+" is the winner");
+           resetgame();
        }
-
-       for(let i=0;i<arr3.length;i=i+3)
-       {
-        if(($('#'+arr3[i])).hasClass('x')&&($('#'+arr3[i+1])).hasClass('x')&&($('#'+arr3[i+2])).hasClass('x')||
-        ($('#'+arr3[i])).hasClass('o')&&($('#'+arr3[i+1])).hasClass('o')&&($('#'+arr3[i+2])).hasClass('o')){
-
-            const winner=($('#'+arr[i]));
-
-      alert(winner+"is the winner");
-        }
+            checkgame();
 
     }
-       
-    //    console.log (($('#'+arr[i])).hasClass('x')===($('#'+arr[i+1])).hasClass('x')&&($('#'+arr[i+2])).hasClass('x')===($('#'+arr[i+1])).hasClass('x'))
-
-
-   
-
 }
-// console.log(true===false)
-// if(winner==true)
-// console.log("we have a winner ")
-// }
 
     
+//to check if there is no winner and display an alert for that
+  const checkgame =()=>{
 
+var count=0;
+for(let i=1;i<10;i++){
+   if( ($('#'+i)).hasClass('x')||($('#'+i)).hasClass('o')){
+    count++     }
 
-let gameOn = true;
-let xNext= true;
+else{ 
+    break;
 
-//
+}}
+    if(count==9){
+    alert('game over')
+    resetgame()
+ }
+  }
 
-
+//to reset the game when clicking on reset
 $(".reset").click(function(){
-$(".cell").empty();
-
-
-
+resetgame()
 })
 
-
-    //console.log(cellDiv);
-    $('.cell').click(function(){
-        //  if($(this) == 'x'||'o')
-        //  return;
-if(xNext===true){
-    $(this).addClass('x')
-    $('.status').html('<div>o is next</div>')
-    gameStatus('x');
-    //console.log("X")
-    xNext= !xNext
+//reset function
+const resetgame =()=>{
+    $('.cell').removeClass('x');
+    $('.cell').removeClass('o');
+//$('.cell').unbind('off');
+location.reload();
 }
-else
-{
-    $(this).addClass('o')
-    $('.status').html('<div>x is next</div>')
+// by default the x will start
+let xNext= true;
 
-    gameStatus('o');
-
-    //console.log("O")
-
-    xNext= !xNext 
-}
-    //console.log("hello test")
-
-        
-    })
+//on click function to start the game by clicking which cell you want
+$('.cell').click(function(){
+    var arr=[1,2,3,4,5,6,7,8,9];
+    var arr2=[1,4,7,2,5,8,3,6,9];
+    var arr3=[1,5,9,3,5,7];
+    //check if in the clicked cell was x then add the class for letter x
     
+    if(xNext===true){
+        $(this).addClass('x')
+        // toggle the statement
+        $('.status').html('<div>o is next</div>').toggleClass('test')
+        //calling the function to check if there is a winner
+        gameStatus(arr);
+        gameStatus(arr2);
+        gameStatus(arr3);
+// !xNext to toggle the turn to O player
+        xNext= !xNext
+        // to make sure that only one click in each cell
+        $(this).off();
+    }
+    else
+    {
+        $(this).addClass('o')
+        $('.status').html('<div>x is next</div>').toggleClass('test')
+        gameStatus(arr);
+        gameStatus(arr2);
+        gameStatus(arr3);
+    
+        xNext= !xNext 
+       $(this).off();
+    
+        
+    }    
+        })
 
+    
