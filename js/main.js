@@ -1,6 +1,6 @@
+$(document).ready(function(){
 //function to check the winner status
 const gameStatus =(array)=>{
-   
     //looping over all cells
     for(let i=0;i<array.length;i=i+3){ 
     
@@ -18,14 +18,10 @@ const gameStatus =(array)=>{
         else{
             res='o';
         }
+
         
-        
-    alert(res+" is the winner");
-    $("<audio></audio>").attr({
-        'src':'sounds/clap.mp3',
-        'volume':0.4,
-        'autoplay':'autoplay'
-    }).appendTo();
+        alert(res+" is the winner");
+
     
     
            resetgame();
@@ -114,4 +110,4 @@ $('.cell').click(function(){
     }    
         })
 
-    
+})
